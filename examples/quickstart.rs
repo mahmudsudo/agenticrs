@@ -19,10 +19,9 @@ impl std::error::Error for CallError {}
 async fn main() -> Result<(), Error<CallError>> {
     tracing_subscriber::fmt::init();
 
-    let response = guard(|_correction| async {
-        call_model("Explain circuit breakers in one sentence").await
-    })
-    .await?;
+    let response =
+        guard(|_correction| async { call_model("Explain circuit breakers in one sentence").await })
+            .await?;
 
     println!("Model said: {response}");
     Ok(())

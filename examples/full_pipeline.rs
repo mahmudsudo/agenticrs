@@ -4,7 +4,9 @@
 //!
 //! Run with: cargo run --example full_pipeline
 
-use agenticrs::{AgentGuard, CircuitBreaker, Error, RateLimitInfo, RateLimitState, SchemaValidator};
+use agenticrs::{
+    AgentGuard, CircuitBreaker, Error, RateLimitInfo, RateLimitState, SchemaValidator,
+};
 use serde_json::json;
 use std::sync::atomic::{AtomicU32, Ordering};
 use std::sync::Arc;
