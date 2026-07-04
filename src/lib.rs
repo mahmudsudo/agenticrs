@@ -175,8 +175,8 @@ where
 
         // Create OTel compatible tracing span
         let span = ::tracing::info_span!(
-            "agentrs.guard",
-            "otel.name" = "agentrs.guard",
+            "agenticrs.guard",
+            "otel.name" = "agenticrs.guard",
             "otel.kind" = "client",
             retry_count = 0,
             status = "success",

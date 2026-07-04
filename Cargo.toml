@@ -1,10 +1,10 @@
 [package]
-name = "agentrs"
+name = "agenticrs"
 version = "0.1.0"
 edition = "2021"
 description = "A resilience and observability layer for LLM and agentic workflows."
 license = "MIT"
-repository = "https://github.com/mahmudsudo/agentrs"
+repository = "https://github.com/mahmudsudo/agenticrs"
 
 [dependencies]
 tokio = { version = "1.0", features = ["time", "sync"] }

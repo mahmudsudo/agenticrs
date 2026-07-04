@@ -1,12 +1,12 @@
-# agentrs
+# agenticrs
 
-[![CI](https://github.com/mahmudsudo/agentrs/actions/workflows/ci.yml/badge.svg)](https://github.com/mahmudsudo/agentrs/actions/workflows/ci.yml)
+[![CI](https://github.com/mahmudsudo/agenticrs/actions/workflows/ci.yml/badge.svg)](https://github.com/mahmudsudo/agenticrs/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 A reliability and observability layer purpose-built for LLM and agentic workloads.
 
 Most agent frameworks retry blindly, swallow malformed model output, and give
-you no visibility into why a tool-call failed. `agentrs` wraps any async
+you no visibility into why a tool-call failed. `agenticrs` wraps any async
 tool-call or LLM call with retries, a circuit breaker, output validation with
 a correction loop, proactive rate-limit backoff, and OTel-compatible tracing
 — without tying you to a specific provider's SDK.
@@ -14,14 +14,14 @@ a correction loop, proactive rate-limit backoff, and OTel-compatible tracing
 ## Installation
 
 ```bash
-cargo add agentrs
+cargo add agenticrs
 ```
 
 Or add it directly to `Cargo.toml`:
 
 ```toml
 [dependencies]
-agentrs = "0.1"
+agenticrs = "0.1"
 ```
 
 ## Features
@@ -36,7 +36,7 @@ agentrs = "0.1"
 ## Quickstart
 
 ```rust
-use agentrs::{guard, Error};
+use agenticrs::{guard, Error};
 
 #[derive(Debug)]
 struct CallError(String);

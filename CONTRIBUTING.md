@@ -1,4 +1,4 @@
-# Contributing to agentrs
+# Contributing to agenticrs
 
 Thanks for considering a contribution. This project is young, so the bar is
 mostly: does it work, is it tested, does it stay in scope.
@@ -6,8 +6,8 @@ mostly: does it work, is it tested, does it stay in scope.
 ## Setup
 
 ```bash
-git clone https://github.com/mahmudsudo/agentrs.git
-cd agentrs
+git clone https://github.com/mahmudsudo/agenticrs.git
+cd agenticrs
 cargo build
 cargo test
 cargo run --example quickstart
@@ -41,6 +41,6 @@ always welcome without prior discussion.
 ## Reporting issues
 
 Please include:
-- The `agentrs` version and Rust version (`rustc --version`).
+- The `agenticrs` version and Rust version (`rustc --version`).
 - A minimal reproduction if possible (a failing `#[tokio::test]` is ideal).
 - What you expected vs. what happened.

@@ -3,7 +3,7 @@
 //!
 //! Run with: cargo run --example quickstart
 
-use agentrs::{guard, Error};
+use agenticrs::{guard, Error};
 
 #[derive(Debug)]
 struct CallError(String);

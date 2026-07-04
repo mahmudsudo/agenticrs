@@ -24,12 +24,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 - `RateLimitState` and `parse_rate_limits()`: proactive backoff based on
   OpenAI-style and Anthropic-style rate-limit headers, applied before a call
   is attempted rather than after it fails.
-- OTel-compatible `tracing` spans (`agentrs.guard`) recording latency, retry
+- OTel-compatible `tracing` spans (`agenticrs.guard`) recording latency, retry
   count, failure reason/type, and token usage (via `TokenUsage` /
   `with_token_extractor`).
 - Integration tests covering flaky-retry recovery, permanent-error
   short-circuiting, a full circuit-breaker state cycle, validation +
   correction, and proactive rate-limit delay.
 
-[Unreleased]: https://github.com/mahmudsudo/agentrs/compare/v0.1.0...HEAD
-[0.1.0]: https://github.com/mahmudsudo/agentrs/releases/tag/v0.1.0
+[Unreleased]: https://github.com/mahmudsudo/agenticrs/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/mahmudsudo/agenticrs/releases/tag/v0.1.0

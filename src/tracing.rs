@@ -9,7 +9,7 @@ pub struct TokenUsageInfo {
     pub total_tokens: Option<u32>,
 }
 
-/// A trait that response types can implement to allow `agentrs` to automatically
+/// A trait that response types can implement to allow `agenticrs` to automatically
 /// record token usage statistics in the tracing spans.
 pub trait TokenUsage {
     /// Extracts the token usage details, if available.

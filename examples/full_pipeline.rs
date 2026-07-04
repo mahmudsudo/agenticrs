@@ -4,7 +4,7 @@
 //!
 //! Run with: cargo run --example full_pipeline
 
-use agentrs::{AgentGuard, CircuitBreaker, Error, RateLimitInfo, RateLimitState, SchemaValidator};
+use agenticrs::{AgentGuard, CircuitBreaker, Error, RateLimitInfo, RateLimitState, SchemaValidator};
 use serde_json::json;
 use std::sync::atomic::{AtomicU32, Ordering};
 use std::sync::Arc;
@@ -50,7 +50,7 @@ async fn main() -> Result<(), Error<ModelError>> {
         .with_rate_limits(rate_limits.clone())
         .with_rate_limit_extractor(|_result: &Result<String, ModelError>| {
             // In a real integration, parse this from response headers, e.g.:
-            // agentrs::parse_rate_limits(response.headers())
+            // agenticrs::parse_rate_limits(response.headers())
             Some(RateLimitInfo {
                 requests_remaining: Some(42),
                 requests_reset: Some(Duration::from_secs(1)),

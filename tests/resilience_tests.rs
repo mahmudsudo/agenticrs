@@ -1,4 +1,4 @@
-use agentrs::{
+use agenticrs::{
     AgentGuard, CircuitBreaker, CircuitState, Error, RateLimitInfo, RateLimitState, RetryPolicy,
 };
 use serde_json::json;
@@ -145,7 +145,7 @@ async fn test_validation_and_correction() {
         "required": ["name", "age"]
     });
 
-    let validator = agentrs::SchemaValidator::new(schema).unwrap();
+    let validator = agenticrs::SchemaValidator::new(schema).unwrap();
 
     let call_count = Arc::new(Mutex::new(0));
     let cc = call_count.clone();
