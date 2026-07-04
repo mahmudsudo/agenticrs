@@ -18,21 +18,18 @@ pub struct SchemaValidator {
 impl SchemaValidator {
     /// Compiles a JSON Schema from a `serde_json::Value`.
     pub fn new(schema_json: Value) -> Result<Self, String> {
-        let schema = JSONSchema::compile(&schema_json)
-            .map_err(|e| e.to_string())?;
+        let schema = JSONSchema::compile(&schema_json).map_err(|e| e.to_string())?;
         Ok(Self { schema })
     }
 
     /// Validates a raw JSON string against the compiled schema.
     pub fn validate(&self, json_str: &str) -> Result<(), String> {
-        let value: Value = serde_json::from_str(json_str)
-            .map_err(|e| format!("Invalid JSON syntax: {}", e))?;
-        
-        self.schema
-            .validate(&value)
-            .map_err(|errs| {
-                let err_msgs: Vec<String> = errs.map(|e| e.to_string()).collect();
-                err_msgs.join(", ")
-            })
+        let value: Value =
+            serde_json::from_str(json_str).map_err(|e| format!("Invalid JSON syntax: {}", e))?;
+
+        self.schema.validate(&value).map_err(|errs| {
+            let err_msgs: Vec<String> = errs.map(|e| e.to_string()).collect();
+            err_msgs.join(", ")
+        })
     }
 }

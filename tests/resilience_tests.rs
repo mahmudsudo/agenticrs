@@ -1,7 +1,9 @@
-use agentrs::{AgentGuard, Error, RetryPolicy, CircuitBreaker, CircuitState, RateLimitState, RateLimitInfo};
+use agentrs::{
+    AgentGuard, CircuitBreaker, CircuitState, Error, RateLimitInfo, RateLimitState, RetryPolicy,
+};
+use serde_json::json;
 use std::sync::{Arc, Mutex};
 use std::time::{Duration, Instant};
-use serde_json::json;
 
 #[derive(Debug, Clone, PartialEq, Eq)]
 enum TestError {
@@ -78,9 +80,7 @@ async fn test_no_retry_on_permanent_error() {
         .run(|_correction| {
             let mut count = cc.lock().unwrap();
             *count += 1;
-            async move {
-                Err(TestError::Permanent)
-            }
+            async move { Err(TestError::Permanent) }
         })
         .await;
 
@@ -157,7 +157,7 @@ async fn test_validation_and_correction() {
             let mut count = cc.lock().unwrap();
             *count += 1;
             let current = *count;
-            
+
             if current == 1 {
                 assert!(correction.is_none());
             } else {
@@ -183,7 +183,7 @@ async fn test_validation_and_correction() {
 #[tokio::test]
 async fn test_proactive_rate_limiting() {
     let state = RateLimitState::new();
-    
+
     // Simulate we have 0 remaining requests, and reset is in 100ms
     let info = RateLimitInfo {
         requests_remaining: Some(0),
@@ -203,5 +203,9 @@ async fn test_proactive_rate_limiting() {
     assert!(res.is_ok());
     let elapsed = start.elapsed();
     // Proactive backoff should have delayed execution by about 100ms
-    assert!(elapsed >= Duration::from_millis(80), "Should have delayed, elapsed={:?}", elapsed);
+    assert!(
+        elapsed >= Duration::from_millis(80),
+        "Should have delayed, elapsed={:?}",
+        elapsed
+    );
 }

@@ -114,14 +114,18 @@ where
 
         match k.as_str() {
             // OpenAI and general requests remaining
-            "x-ratelimit-remaining-requests" | "anthropic-ratelimit-requests-remaining" | "ratelimit-remaining" => {
+            "x-ratelimit-remaining-requests"
+            | "anthropic-ratelimit-requests-remaining"
+            | "ratelimit-remaining" => {
                 if let Ok(rem) = v.parse::<u32>() {
                     info.requests_remaining = Some(rem);
                     found = true;
                 }
             }
             // OpenAI and general requests reset
-            "x-ratelimit-reset-requests" | "anthropic-ratelimit-requests-reset" | "ratelimit-reset" => {
+            "x-ratelimit-reset-requests"
+            | "anthropic-ratelimit-requests-reset"
+            | "ratelimit-reset" => {
                 if let Some(dur) = parse_duration_string(v) {
                     info.requests_reset = Some(dur);
                     found = true;
@@ -145,7 +149,11 @@ where
         }
     }
 
-    if found { Some(info) } else { None }
+    if found {
+        Some(info)
+    } else {
+        None
+    }
 }
 
 /// Helper function to parse duration string (e.g. "6s", "20ms", "1m30s", or float seconds "1.5")

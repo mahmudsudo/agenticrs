@@ -102,7 +102,7 @@ impl CircuitBreaker {
     pub fn record_success(&self) {
         let mut state_lock = self.state.lock().unwrap();
         let old_state = state_lock.state;
-        
+
         state_lock.failures = 0;
         state_lock.last_failure_time = None;
         state_lock.state = CircuitState::Closed;
@@ -120,7 +120,9 @@ impl CircuitBreaker {
         state_lock.failures += 1;
         state_lock.last_failure_time = Some(Instant::now());
 
-        if state_lock.state == CircuitState::HalfOpen || state_lock.failures >= self.failure_threshold {
+        if state_lock.state == CircuitState::HalfOpen
+            || state_lock.failures >= self.failure_threshold
+        {
             let old_state = state_lock.state;
             state_lock.state = CircuitState::Open;
             if old_state != CircuitState::Open {

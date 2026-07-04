@@ -51,7 +51,7 @@ impl RetryPolicy {
         if attempt == 0 {
             return Duration::ZERO;
         }
-        
+
         let factor = self.backoff_factor.powi(attempt as i32 - 1);
         let delay_secs = self.initial_delay.as_secs_f64() * factor;
         let mut delay = Duration::from_secs_f64(delay_secs);

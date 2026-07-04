@@ -1,20 +1,19 @@
 #![allow(clippy::type_complexity)]
-pub mod retry;
 pub mod circuit_breaker;
-pub mod validation;
 pub mod rate_limit;
+pub mod retry;
 pub mod tracing;
+pub mod validation;
 
 use std::future::Future;
 use std::sync::Arc;
 use std::time::Instant;
 
-pub use retry::{RetryPolicy, ClassifyError, DefaultClassifier};
 pub use circuit_breaker::{CircuitBreaker, CircuitState};
+pub use rate_limit::{parse_rate_limits, RateLimitInfo, RateLimitState};
+pub use retry::{ClassifyError, DefaultClassifier, RetryPolicy};
+pub use tracing::{TokenUsage, TokenUsageInfo};
 pub use validation::{Correction, SchemaValidator};
-pub use rate_limit::{RateLimitInfo, RateLimitState, parse_rate_limits};
-pub use tracing::{TokenUsageInfo, TokenUsage};
-
 
 /// Crate-level error type representing failures in the guard wrapper.
 #[derive(Debug)]
@@ -285,7 +284,11 @@ where
                         }
                         span.record("status", "error");
                         span.record("failure_reason", err.to_string());
-                        let failure_type = if is_transient { "TransientError" } else { "PermanentError" };
+                        let failure_type = if is_transient {
+                            "TransientError"
+                        } else {
+                            "PermanentError"
+                        };
                         span.record("failure_type", failure_type);
                         span.record("latency_ms", start_time.elapsed().as_millis() as u64);
                         span.record("retry_count", attempts - 1);
